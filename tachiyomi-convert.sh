@@ -14,18 +14,21 @@ convert() {
 		for i in "$abs_dir"/*/
 			do
 				echo $(basename "$i")
-			#	zip -r "$(basename "$i").cbz" "$i" & done
-			wait
-		done
+				zip -r "$(basename "$i").cbz" "$i" & done
+		wait
 	else
 		zip -r $(basename "$abs_dir").cbz "$abs_dir"
 	fi
 }
 
+rename() {
+	find "$1" -type f -name "*_*" -exec bash -c 'f="$1"; g="${f/*_/}"; mv -- "$f" "$g"' _ '{}' \;
+}
+
 
 
 usage() {
-	echo "hi"		
+	echo "Usage Still work in progress"		
 }
 
 main "$@"
